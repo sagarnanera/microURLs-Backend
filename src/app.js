@@ -74,7 +74,7 @@ app.post("/add",
                 res.status(200).json({
                     success: true,
                     Original_URL: result.Original_URL,
-                    shorten_URL: process.env.IS_DEV === true
+                    Shorten_URL: process.env.IS_DEV === true
                         ? "http://" + hostname + `:${port}/` + result.Shorten_URL_slug
                         : process.env.DOMAIN_NAME + "/" + result.Shorten_URL_slug
                 });
@@ -93,7 +93,7 @@ app.post("/add",
                 res.status(200).json({
                     success: true,
                     Original_URL: newrecord.Original_URL,
-                    shorten_URL: process.env.IS_DEV === true
+                    Shorten_URL: process.env.IS_DEV === true
                         ? "http://" + hostname + `:${port}/` + newrecord.Shorten_URL_slug
                         : process.env.DOMAIN_NAME + "/" + newrecord.Shorten_URL_slug
                 });

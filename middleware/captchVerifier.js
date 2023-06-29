@@ -14,8 +14,8 @@ const captchaVerify = async (req, res, next) => {
 
         if (!CaptchaRes.data.success) {
             console.log("BOT!!!", req.ip);
-            res.json({
-                status: 403,
+            res.status(403).json({
+                success: false,
                 msg: "Forbidden!! , captcha verification failed....."
             });
             return;
@@ -24,7 +24,7 @@ const captchaVerify = async (req, res, next) => {
         next();
     } catch (error) {
         console.error(error);
-        res.json({ status: 500, msg: "Internal server error...." });
+        res.status(500).json({ success: false, msg: "Internal server error...." });
         return;
     }
 };

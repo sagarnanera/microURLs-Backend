@@ -8,6 +8,9 @@ const captchaVerify = async (req, res, next) => {
     try {
         const { captchaToken } = req.body;
 
+        console.log("Captcah-token ... : " + captchaToken);
+        console.log("key : " + recaptchaKey);
+
         const CaptchaRes = await axios.post(
             `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaKey}&response=${captchaToken}`
         );

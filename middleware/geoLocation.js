@@ -30,8 +30,8 @@ const getGeoLocation = async (req, res, next) => {
                 city: data.city,
                 timeZone: data.timezone,
                 coordinates: [
-                    data.lon !== "nil" ? data.longitude : 0,
-                    data.lat !== "nil" ? data.latitude : 0
+                    data.lon,
+                    data.lat
                 ]
             };
 
@@ -39,8 +39,9 @@ const getGeoLocation = async (req, res, next) => {
 
             req.isMobile = data.mobile
 
-            next();
         }
+
+        next();
 
     } catch (error) {
         console.error("error in geolocation middleware....." + error);

@@ -19,5 +19,6 @@ app.use(logger('dev'));
 
 app.listen(PORT, (err) => {
     if (err) console.log(err);
-    console.log(`server started on http://${web_host}:${PORT}`);
+    console.log(`DEV_MODE :  ${process.env.IS_DEV} \n` + `server started on ${process.env.IS_DEV === true ?
+        `http://${web_host}:${PORT}` : process.env.DOMAIN_NAME}`);
 })

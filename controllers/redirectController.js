@@ -9,9 +9,9 @@ exports.redirectUser = async (req, res) => {
 
     try {
 
-        if (slug === "api" || "api/") {
-
-        }
+        // if (slug === "api" || "api/") {
+        //     return.
+        // }
 
         const shorten_URL = await URL.findOne({ Shorten_URL_slug: slug });
 

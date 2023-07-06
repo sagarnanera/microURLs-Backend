@@ -17,8 +17,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
 // app.use(cors());
 
+
 app.listen(PORT, (err) => {
     if (err) console.log(err);
-    console.log(`DEV_MODE :  ${process.env.IS_DEV} \n` + `server started on ${process.env.IS_DEV === true ?
+    console.log(`DEV_MODE :  ${process.env.IS_DEV} \n` + `server started on ${process.env.IS_DEV === "true" ?
         `http://${web_host}:${PORT}` : process.env.DOMAIN_NAME}`);
 })

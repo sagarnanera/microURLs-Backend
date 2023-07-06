@@ -1,7 +1,8 @@
 const axios = require("axios");
 
-const getGeoLocation = async (req, res, next) => {
+const geoLocationMiddleware = async (req, res, next) => {
     try {
+
         req.ipAddress = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
 
         console.log("headers >>>>" + req.connection.remoteAddress + "  >> " + req.ipAddress);
@@ -52,4 +53,4 @@ const getGeoLocation = async (req, res, next) => {
     }
 };
 
-module.exports = getGeoLocation;
+module.exports = geoLocationMiddleware;

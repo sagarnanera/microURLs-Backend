@@ -12,7 +12,8 @@ const Urlschema = new mongoose.Schema({
     },
     Shorten_URL_slug: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     userIP: {
         type: String,
@@ -33,9 +34,13 @@ const Urlschema = new mongoose.Schema({
             index: "2dsphere"
         }
     },
-    date: {
+    createdOn: {
         type: Date,
         default: Date.now
+    },
+    lastUpdatedOn: {
+        type: Date,
+        default: null
     }
 });
 

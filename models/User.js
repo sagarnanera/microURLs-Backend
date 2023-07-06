@@ -13,6 +13,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    isEmailVerified: {
+        type: Boolean,
+        default: false
+    },
     lastLoginIp: {
         type: String,
         required: true
@@ -24,6 +28,14 @@ const UserSchema = new mongoose.Schema({
     registeredOn: {
         type: Date,
         default: Date.now
+    },
+    resetPasswordToken: {
+        type: String,
+        default: undefined
+    },
+    resetPasswordExpires: {
+        type: Date,
+        default: undefined
     }
 });
 

@@ -188,7 +188,7 @@ exports.ResendVerificationMail = async (req, res) => {
         const user = await User.findById(req.user._id).select("email isEmailVerified");
 
         if (user.isEmailVerified) {
-            res.status(400).
+            return res.status(400).
                 json({
                     success: false,
                     message: "Email is already verified"

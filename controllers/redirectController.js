@@ -8,6 +8,11 @@ exports.redirectUser = async (req, res) => {
     const slug = req.params.slug;
 
     try {
+
+        if (slug === "api" || "api/") {
+
+        }
+
         const shorten_URL = await URL.findOne({ Shorten_URL_slug: slug });
 
         if (!shorten_URL) {
@@ -27,11 +32,13 @@ exports.redirectUser = async (req, res) => {
         });
 
         newClick.save();
-        res.redirect(Original_URL);  
+        res.redirect(Original_URL);
+
         // res.render("redirect-error-page", { Original_URL });
         return;
     } catch (error) {
+        const LinkToHome = process.env.CLIENT_HOST;
         console.log("error in redirecting : " + error);
-        res.status(500).render("redirect-error-page", { Original_URL: "" });
+        res.status(500).render("redirect-error-page", { LinkToHome });
     }
 }

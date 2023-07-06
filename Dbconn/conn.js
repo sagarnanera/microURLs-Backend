@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 const env = process.env.IS_DEV;
-const HOST = env === "true" ? process.env.MONGODB_URI_LOCAL : process.env.MONGODB_URI_LOCAL;
+const HOST = env === "true" ? process.env.MONGODB_URI_LOCAL : process.env.MONGODB_URI;
+
 
 mongoose.connect(
     HOST,
@@ -14,7 +15,7 @@ mongoose.connect(
     (err) =>
         err ?
             console.log(err) :
-            console.log(`Connected to microURLs database ${env === "true" ? "local" : "Atlas"}`)
+            console.log(`Connected to microURLs database ${env === "true" ? "local" : "Atlas"} \n HOST: ${HOST}`)
 );
 
 const conn = mongoose.connection;

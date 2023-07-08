@@ -26,3 +26,8 @@ exports.tokenValidator = joi.object({
     token: joi.string().length(64).required()
 })
 
+exports.contactUsValidator = joi.object({
+    name: joi.string().max(20),
+    email: joi.string().email().required(),
+    message: joi.string().max(1500).required()
+})

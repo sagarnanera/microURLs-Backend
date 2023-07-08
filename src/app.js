@@ -17,12 +17,15 @@ const { redirectUser } = require("../controllers/redirectController");
 const authRoute = require("../routes/authRoute");
 const urlRoute = require("../routes/urlRoute");
 const userRoute = require("../routes/userRoute");
+const supportRoute = require("../routes/supportRoute");
 
 
 const app = express();
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+var monitor = require('express-status-monitor');
+app.use(monitor());
 
 // view engine setup
 app.set('view engine', 'ejs');
@@ -54,6 +57,7 @@ app.get("/", geoLocationMiddleware, (req, res) => {
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/url", urlRoute);
+app.use("/api/support", supportRoute);
 app.get("/:slug", geoLocationMiddleware, redirectUser);
 
 app.use((err, req, res, next) => {

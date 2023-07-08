@@ -5,7 +5,7 @@ const geoLocationMiddleware = async (req, res, next) => {
 
         req.ipAddress = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
 
-        console.log("headers >>>>" + req.connection.remoteAddress + "  >> " + req.ipAddress);
+        console.log("ip headers >>>>" + req.connection.remoteAddress + "  >> " + req.ipAddress);
 
         if (req.ipAddress.startsWith("::ffff:")) {
             req.ipAddress = req.ipAddress.slice(7);

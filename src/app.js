@@ -31,7 +31,7 @@ app.use(monitor());
 app.set('view engine', 'ejs');
 app.set('views', './view');
 
-app.use(logger(':remote-addr[0] - :req[X-Forwarded-For] - :req[host] - :remote-user [:date[web]] ":method :url HTTP/:http-version" :status :response-time ms :res[content-length] ":referrer" ":user-agent"'));
+app.use(logger('client_addr: :req[X-Forwarded-For] - host: :req[host] - [:date[web]] ":method :url HTTP/:http-version" :status :response-time ms :res[content-length] ":referrer" ":user-agent"'));
 
 app.use(cookieParser());
 
@@ -45,8 +45,6 @@ app.use(cors({
 }));
 
 app.get("/", geoLocationMiddleware, (req, res) => {
-
-    console.log("user-agent : " + req.get("user-agent"));
 
     const test_slug = randomstring.generate(8);
     res

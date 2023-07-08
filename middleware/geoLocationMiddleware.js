@@ -9,9 +9,9 @@ const geoLocationMiddleware = async (req, res, next) => {
             req.ipAddress = req.ipAddress.slice(7);
         }
 
-        console.log("client IP : ... " + req.headers["x-forwarded-for"] + " - " + req.connection.remoteAddress);
-
         req.ipAddress = req.ipAddress.split(",")[0].trim();
+
+        console.log("client IP : ... " + req.ipAddress);
 
         const response = await axios.get(
             // `https://get.geojs.io/v1/ip/geo/${req.ipAddress}.json`,

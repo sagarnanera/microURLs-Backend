@@ -134,7 +134,7 @@ exports.Register = async (req, res) => {
 
 
             const verificationToken = genJWTToken({ email: newUser.email }, "verify-Email");
-            const verificationLink = `${hostName}/api/auth/verify-email/${verificationToken}`;
+            const verificationLink = `${hostName}/api/support/verify-email/${verificationToken}`;
 
             const template = fs.readFileSync(
                 path.join(__dirname, "../view/email-verification.ejs"),

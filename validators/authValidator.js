@@ -29,5 +29,6 @@ exports.tokenValidator = joi.object({
 exports.contactUsValidator = joi.object({
     name: joi.string().max(20),
     email: joi.string().email().required(),
-    message: joi.string().max(1500).required()
+    message: joi.string().max(1500).required(),
+    captchaToken: joi.string().required()
 })

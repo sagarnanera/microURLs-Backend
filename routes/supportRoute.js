@@ -12,6 +12,6 @@ router.route("/reset-password").post(geoLocationMiddleware, ResetPassword);
 router.route("/verify-email/:token").get(geoLocationMiddleware, VerifyEmail);
 router.route("/resend-verification-email").post(authenticateJWT, geoLocationMiddleware, ResendVerificationMail);
 
-router.route("/contact-us").post(geoLocationMiddleware, ContactUS);
+router.route("/contact-us").post(captchaVerify, geoLocationMiddleware, ContactUS);
 
 module.exports = router;

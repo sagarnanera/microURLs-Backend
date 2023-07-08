@@ -15,8 +15,8 @@ router.route("/deleteURL").post(authenticateJWT, geoLocationMiddleware, deleteUR
 router.route("/geturls").get(authenticateJWT, geoLocationMiddleware, getURLs);
 router.route("/geturl/:id").get(authenticateJWT, geoLocationMiddleware, getURLbyId);
 
-router.route("/getData").get(authenticateJWT, getData);
-router.route("/getData/:id").get(authenticateJWT, getDatabyId);
+router.route("/getData").get(authenticateJWT, geoLocationMiddleware, getData);
+router.route("/getData/:id").get(authenticateJWT, geoLocationMiddleware, getDatabyId);
 
 
 module.exports = router;

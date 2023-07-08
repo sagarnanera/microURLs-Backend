@@ -44,6 +44,9 @@ app.use(cors({
 }));
 
 app.get("/", geoLocationMiddleware, (req, res) => {
+
+    console.log(req.get("user-agent"));
+
     const test_slug = randomstring.generate(8);
     res
         .status(200)

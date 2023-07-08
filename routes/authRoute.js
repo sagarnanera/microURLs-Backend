@@ -6,15 +6,15 @@ const geoLocationMiddleware = require('../middleware/geoLocationMiddleware');
 const router = express.Router();
 
 
-// router.route("/login").post(captchaVerify, geoLocationMiddleware, Login);
-// router.route("/register").post(captchaVerify, geoLocationMiddleware, Register);
+router.route("/login").post(captchaVerify, geoLocationMiddleware, Login);
+router.route("/register").post(captchaVerify, geoLocationMiddleware, Register);
 
 // for testing only
-router.route("/register").post(geoLocationMiddleware, Register);
-router.route("/login").post(geoLocationMiddleware, Login);
+// router.route("/register").post(geoLocationMiddleware, Register);
+// router.route("/login").post(geoLocationMiddleware, Login);
 
 // protected routes
-router.route("/logout").post(authenticateJWT, LogOut);
+router.route("/logout").post(authenticateJWT, geoLocationMiddleware, LogOut);
 
 
 module.exports = router;

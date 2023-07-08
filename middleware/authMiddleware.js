@@ -5,7 +5,7 @@ const authenticateJWT = async (req, res, next) => {
     try {
         passport.authenticate('jwt', function (err, user, info) {
             if (err) {
-                console.log(err);
+                // console.log(err);
                 throw err
             };
             if (!user) {

@@ -31,7 +31,8 @@ app.use(monitor());
 app.set('view engine', 'ejs');
 app.set('views', './view');
 
-app.use(logger("dev"));
+app.use(logger(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :response-time ms :res[content-length] ":referrer" ":user-agent"'));
+
 app.use(cookieParser());
 
 // passportJS config
@@ -45,7 +46,7 @@ app.use(cors({
 
 app.get("/", geoLocationMiddleware, (req, res) => {
 
-    console.log(req.get("user-agent"));
+    console.log("user-agent : " + req.get("user-agent"));
 
     const test_slug = randomstring.generate(8);
     res

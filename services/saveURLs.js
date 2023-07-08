@@ -31,7 +31,6 @@ const saveURL = async (reqSlug, reqURL, reqUserId = null, ipAddress, location) =
         newRecord = await generateUniqueSlug(reqURL, ipAddress, location);
     }
 
-    console.log(reqUserId);
     newRecord.User = reqUserId;
     await newRecord.save();
     return newRecord;

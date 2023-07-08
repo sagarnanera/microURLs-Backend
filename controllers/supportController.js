@@ -45,7 +45,6 @@ exports.ForgotPassword = async (req, res) => {
             "utf8");
         const subject = "Password Reset";
         const resetLink = `${hostName}/api/support/reset-password/${token}`
-        // console.log(resetLink);
 
         const html = ejs.render(template, { ipAddress: req.ipAddress, location: req.location, resetLink });
 

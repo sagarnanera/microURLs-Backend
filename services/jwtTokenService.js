@@ -9,7 +9,6 @@ const genJWTToken = (payload, type = null) => {
 
     try {
 
-        console.log(type);
         console.log(type ? JWT_EXP_VERIFICATION_EMAIL : JWT_EXP);
 
         const token = jwt.sign(

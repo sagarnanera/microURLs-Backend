@@ -12,8 +12,6 @@ const hostName = process.env.IS_DEV === "true" ?
 
 exports.Login = async (req, res) => {
     try {
-        console.log(req.body);
-
         const { error } = userLoginValidator.validate(req.body);
 
         if (error) {
@@ -79,8 +77,6 @@ exports.Login = async (req, res) => {
 exports.Register = async (req, res) => {
     try {
 
-        console.log(req.body);
-
         const { error } = userSignupValidator.validate(req.body);
 
         if (error) {
@@ -107,8 +103,6 @@ exports.Register = async (req, res) => {
                 email: email,
                 password: hash
             });
-
-            console.log(newUser);
 
             const payload = {
                 _id: newUser._id,
@@ -171,7 +165,6 @@ exports.Register = async (req, res) => {
 exports.LogOut = async (req, res) => {
 
     try {
-        console.log(req.user);
         res.clearCookie("token");
         res.status(200).send({ success: "true", message: "Successfully Logged Out" });
     } catch (error) {

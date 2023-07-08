@@ -17,7 +17,6 @@ const generateUniqueSlug = async (originalURL, userIP, locationInfo) => {
                 userIP: userIP,
                 locationInfo: locationInfo
             });
-            console.log("In slugGen : " + customSlug);
             isUnique = true; // If no error is thrown, the slug is unique
             return createdURL; // Return the created URL object
         } catch (error) {

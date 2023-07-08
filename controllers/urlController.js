@@ -22,9 +22,6 @@ exports.AddURL = async (req, res) => {
 
         const { Original_URL: reqURL, customSlug: reqSlug } = req.body;
 
-        console.log("reqHost : " + new URL(reqURL).hostname);
-        console.log("serverHost : " + new URL(DomainName).hostname);
-
         if (new URL(reqURL).hostname === new URL(DomainName).hostname) {
             return res
                 .status(400)
@@ -77,8 +74,6 @@ exports.addURLprivate = async (req, res) => {
 
         const newRecord = await saveURL(reqSlug, reqURL, req.user._id, req.ipAddress, req.location);
 
-        console.log("Request IP : ", req.ipAddress);
-
         res.status(200).json({
             success: true,
             Original_URL: newRecord.Original_URL,
@@ -125,7 +120,6 @@ exports.EditURLslug = async (req, res) => {
 
         const isSlugTaken = await URLmodel.findOne({ Shorten_URL_slug: updatedSlug });
 
-        console.log(isSlugTaken);
         if (isSlugTaken) {
             throw new SlugAlreadyTakenError("Slug is already taken !!!")
         }
@@ -190,8 +184,6 @@ exports.getURLs = async (req, res) => {
     try {
 
         const userId = req.user._id;
-
-        console.log(userId);
 
         const urls = await URLmodel.find({ User: userId }).select("_id Original_URL Shorten_URL_slug");
 
@@ -408,8 +400,6 @@ exports.getData = async (req, res) => {
         const result = await URLmodel.aggregate(pipeline);
         result[0].totalUrls = totalUrls;
 
-        // console.log(result);
-
         res.status(200)
             .json({
                 success: true,
@@ -560,8 +550,6 @@ exports.getDatabyId = async (req, res) => {
 
 
         const result = await URLmodel.aggregate(pipeline);
-
-        // console.log(result);
 
         if (!result[0].totalClicks) {
             return res.status(404).json({ success: false, msg: "No data found for the URL" });

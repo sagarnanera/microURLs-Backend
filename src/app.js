@@ -31,7 +31,7 @@ app.use(monitor());
 app.set('view engine', 'ejs');
 app.set('views', './view');
 
-app.use(logger(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :response-time ms :res[content-length] ":referrer" ":user-agent"'));
+app.use(logger(':remote-addr - :remote-user [:date[web]] ":method :url HTTP/:http-version" :status :response-time ms :res[content-length] ":referrer" ":user-agent"'));
 
 app.use(cookieParser());
 

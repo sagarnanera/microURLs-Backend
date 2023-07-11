@@ -8,9 +8,6 @@ const captchaVerify = async (req, res, next) => {
     try {
         const { captchaToken } = req.body;
 
-        console.log("Captcah-token ... : " + captchaToken);
-        console.log("key : " + recaptchaKey);
-
         const CaptchaRes = await axios.post(
             `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaKey}&response=${captchaToken}`
         );
@@ -19,7 +16,7 @@ const captchaVerify = async (req, res, next) => {
             console.log("BOT!!!", req.ip);
             res.status(403).json({
                 success: false,
-                msg: "Forbidden!! , captcha verification failed....."
+                message: "Forbidden!! , captcha verification failed....."
             });
             return;
         }
@@ -27,7 +24,7 @@ const captchaVerify = async (req, res, next) => {
         next();
     } catch (error) {
         console.error(error);
-        res.status(500).json({ success: false, msg: "Internal server error...." });
+        res.status(500).json({ success: false, message: "Internal server error...." });
         return;
     }
 };

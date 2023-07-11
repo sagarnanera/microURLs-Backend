@@ -8,9 +8,6 @@ const JWT_EXP_VERIFICATION_EMAIL = process.env.JWT_EXP_VERIFICATION_EMAIL;
 const genJWTToken = (payload, type = null) => {
 
     try {
-
-        console.log(type ? JWT_EXP_VERIFICATION_EMAIL : JWT_EXP);
-
         const token = jwt.sign(
             payload,
             JWT_SEC,

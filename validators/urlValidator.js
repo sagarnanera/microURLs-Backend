@@ -1,7 +1,10 @@
 const joi = require("joi");
 
 exports.urlValidator = joi.object({
-    Original_URL: joi.string().uri().required(),
+    Original_URL: joi.string().uri().required().messages({
+        'string.uri': 'Provide a valid URL',
+        'string.empty': 'Provide Original long URL'
+    }),
     customSlug: joi.string().regex(/^[a-zA-Z0-9]+$/).min(6).messages({
         'string.pattern.base': 'customSlug can only contain uppercase and lowercase letters, and numbers',
     }),

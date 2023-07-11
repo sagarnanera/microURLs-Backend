@@ -43,7 +43,7 @@ const geoLocationMiddleware = async (req, res, next) => {
     } catch (error) {
         console.error("error in geolocation middleware....." + error);
         res.status(500).json({
-            success: false, msg: "Internal server error...."
+            success: false, message: "Internal server error...."
         });
         return;
     }

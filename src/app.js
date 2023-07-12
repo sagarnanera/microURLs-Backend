@@ -46,13 +46,12 @@ app.use(cors({
 
 app.get("/", geoLocationMiddleware, (req, res) => {
 
-    const test_slug = randomstring.generate(8);
+    const test_slug = randomstring.generate(16);
     res
         .status(200)
         .json({
-            test_slug: test_slug,
-            req_ip: req.ipAddress,
-            locationInfo: req.location
+            message: "Server is up 🛠 !!!!",
+            token: test_slug
         });
 });
 
@@ -62,13 +61,17 @@ app.use("/api/url", urlRoute);
 app.use("/api/support", supportRoute);
 app.get("/:slug", geoLocationMiddleware, redirectUser);
 
+app.get('*', (req, res) => {
+    return res.status(404).json({ message: 'Not found, Check the URL properly !!!' });
+})
+
 app.use((err, req, res, next) => {
     console.log(err);
     if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
-        return res.status(400).json({ error: 'Invalid JSON payload' });
+        return res.status(400).json({ message: 'Invalid JSON payload' });
     }
 
-    return res.status(500).json({ error: 'Internal Server Error' });
+    return res.status(500).json({ message: 'Internal Server Error' });
 });
 
 module.exports = app;

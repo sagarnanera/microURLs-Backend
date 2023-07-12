@@ -1,9 +1,10 @@
 const URLmodel = require("../models/URL");
 const ClickModel = require("../models/Click");
-const { urlValidator, urlValidatorPrivate, editURLValidator, deleteURLValidator } = require("../validators/urlValidator");
+const { urlValidator, urlValidatorPrivate, editURLValidator, deleteURLValidator, getTotalClicksValidator } = require("../validators/urlValidator");
 const { URL } = require('url');
 const { saveURL, SlugAlreadyTakenError } = require("../services/saveURLs");
 const { default: mongoose } = require("mongoose");
+const Click = require("../models/Click");
 
 const hostname = process.env.WEB_HOST;
 const port = process.env.PORT;
@@ -580,3 +581,55 @@ exports.getDatabyId = async (req, res) => {
         });
     }
 };
+
+exports.getTotalClicks = async (req, res) => {
+
+    try {
+
+        const { error } = getTotalClicksValidator.validate(req.body);
+
+        if (error) {
+            return res.status(400).json({ message: error.details[0].message });
+        }
+
+        const { urls } = req.body;
+
+        const urlIds = urls.map((url) => mongoose.Types.ObjectId(url._id));
+
+        // Aggregate the clicks model to count the total clicks for each URL
+        const pipeline = [
+            {
+                $match: {
+                    URL_id: { $in: urlIds }
+                }
+            },
+            {
+                $group: {
+                    _id: "$URL_id",
+                    totalClicks: { $sum: 1 },
+                    botClicks: { $sum: { $cond: [{ $eq: ["$isBotClick", true] }, 1, 0] } },
+                    humanClicks: { $sum: { $cond: [{ $eq: ["$isBotClick", false] }, 1, 0] } }
+                }
+            }
+        ];
+
+        const result = await Click.aggregate(pipeline);
+
+        console.log(result);
+
+        // Create an object to store the total clicks for each URL
+        const totalClicks = {};
+
+        // Map the aggregation result to the totalClicks object
+        result.forEach((entry) => {
+            totalClicks[entry._id] = { totalClicks: entry.totalClicks, botClicks: entry.botClicks, humanClicks: entry.humanClicks };
+        });
+
+        res.status(200).json({ success: true, totalClicks });
+
+
+    } catch (error) {
+        console.error('Error retrieving total clicks:', error);
+        res.status(500).json({ message: 'Error retrieving total clicks' });
+    }
+}

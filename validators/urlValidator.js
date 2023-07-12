@@ -28,3 +28,15 @@ exports.editURLValidator = joi.object({
 exports.deleteURLValidator = joi.object({
     id: joi.string().required(),
 });
+
+
+exports.getTotalClicksValidator = joi.object({
+    urls: joi.array().items(
+        joi.object({
+            _id: joi.string().required(),
+        })
+    ).required(),
+    captchaToken: joi.string().required(),
+});
+
+

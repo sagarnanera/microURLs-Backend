@@ -1,5 +1,5 @@
 const express = require('express');
-const { AddURL, EditURLslug, deleteURL, getURLs, getURLbyId, addURLprivate, getDatabyId, getData } = require('../controllers/urlController');
+const { AddURL, EditURLslug, deleteURL, getURLs, getURLbyId, addURLprivate, getDatabyId, getData, getTotalClicks } = require('../controllers/urlController');
 const authenticateJWT = require('../middleware/authMiddleware');
 const geoLocationMiddleware = require('../middleware/geoLocationMiddleware');
 const captchaVerify = require('../middleware/captchVerifier');
@@ -7,6 +7,7 @@ const router = express.Router();
 
 
 router.route("/addURL").post(captchaVerify, geoLocationMiddleware, AddURL);
+router.route("/getClicks").post(captchaVerify, geoLocationMiddleware, getTotalClicks);
 
 // protected routes - auth required
 router.route("/addURLprivate").post(authenticateJWT, geoLocationMiddleware, addURLprivate);

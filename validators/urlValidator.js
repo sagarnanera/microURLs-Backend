@@ -31,11 +31,7 @@ exports.deleteURLValidator = joi.object({
 
 
 exports.getTotalClicksValidator = joi.object({
-    urls: joi.array().items(
-        joi.object({
-            _id: joi.string().required(),
-        })
-    ).required(),
+    urls: joi.array().items(joi.string()).required(),
     captchaToken: joi.string().required(),
 });
 

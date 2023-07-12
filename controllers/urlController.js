@@ -589,14 +589,13 @@ exports.getTotalClicks = async (req, res) => {
         const { error } = getTotalClicksValidator.validate(req.body);
 
         if (error) {
-            return res.status(400).json({ message: error.details[0].message });
+            return res.status(400).json({ success: false, message: error.details[0].message });
         }
 
         const { urls } = req.body;
 
-        const urlIds = urls.map((url) => mongoose.Types.ObjectId(url._id));
+        const urlIds = urls.map((url) => mongoose.Types.ObjectId(url));
 
-        // Aggregate the clicks model to count the total clicks for each URL
         const pipeline = [
             {
                 $match: {

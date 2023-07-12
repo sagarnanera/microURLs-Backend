@@ -41,8 +41,8 @@ require("../config/passport")(passport);
 
 app.use(cors({
     origin: ['http://localhost:3000',
-        'https://app.microurl.live/',
-        'https://microurls-frontend.vercel.app/'
+        'https://app.microurl.live',
+        'https://microurls-frontend.vercel.app'
     ],
     credentials: true,
 }));

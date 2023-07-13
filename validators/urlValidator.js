@@ -32,7 +32,7 @@ exports.deleteURLValidator = joi.object({
 
 exports.getTotalClicksValidator = joi.object({
     urls: joi.array().items(joi.string()).required(),
-    captchaToken: joi.string().required(),
+    // captchaToken: joi.string().required(),
 });
 
 

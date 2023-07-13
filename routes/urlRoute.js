@@ -7,7 +7,7 @@ const router = express.Router();
 
 
 router.route("/addURL").post(captchaVerify, geoLocationMiddleware, AddURL);
-router.route("/getClicks").post(captchaVerify, geoLocationMiddleware, getTotalClicks);
+router.route("/getClicks").post(geoLocationMiddleware, getTotalClicks);
 
 // protected routes - auth required
 router.route("/addURLprivate").post(authenticateJWT, geoLocationMiddleware, addURLprivate);

@@ -1,5 +1,5 @@
 {
-  "name": "URLShortner",
+  "name": "microurl",
   "version": "1.0.0",
   "description": "This is an URL Shortner app.",
   "main": "server.js",

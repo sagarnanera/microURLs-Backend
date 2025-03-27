@@ -594,7 +594,7 @@ exports.getTotalClicks = async (req, res) => {
 
         const { urls } = req.body;
 
-        const urlIds = urls.map((url) => mongoose.Types.ObjectId(url));
+        const urlIds = urls.map((url) => new mongoose.Types.ObjectId(url));
 
         const pipeline = [
             {
